@@ -1,11 +1,177 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const disciplines = ['Design', 'Branding', 'Development'];
 ---
 
 <Layout>
-	<Welcome />
+	<main
+		class="relative isolate flex min-h-[max(680px,100svh)] flex-col overflow-hidden border border-white/35 bg-[#170809]"
+		id="top"
+	>
+		<div class="hero__image pointer-events-none absolute inset-0" aria-hidden="true"></div>
+		<div class="hero__wash pointer-events-none absolute inset-0" aria-hidden="true"></div>
+		<div class="hero__grain pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+		<header
+			class="relative z-10 grid grid-cols-2 items-start gap-x-3 gap-y-[17px] px-[5%] py-[22px] font-mono text-sm font-semibold leading-6 uppercase tracking-[0.01em] md:grid-cols-[1fr_1fr_1.3fr_1fr] md:gap-5 md:px-[3.1%] md:py-[26px]"
+		>
+			<a class="tracking-[-0.06em]" href="#top" aria-label="Reemium home">
+				<img class="w-[60px] md:w-[88px]" src="/assets/img/logo.png" alt="Reemium logo" aria-hidden="true" />
+			</a>
+			<a class="justify-self-end md:justify-self-start" href="#work">
+				Selected work <span class="text-white/60">[12]</span>
+			</a>
+			<nav class="flex justify-start gap-[9px] md:justify-center" aria-label="Main navigation">
+				<a href="#about">About</a>
+				<a href="#services">Service</a>
+				<a href="#contact">Contact</a>
+			</nav>
+			<div class="grid justify-self-end gap-[5px]">
+				<a href="mailto:info@reemium.com">↗ info@reemium.com</a>
+				<a href="mailto:hello@reemium.com">↗ Enquiries</a>
+			</div>
+		</header>
+
+		<section
+			class="relative z-10 flex flex-1 flex-col justify-center gap-[37px] px-[6%] py-[55px] md:flex-row md:items-center md:justify-between md:gap-8 md:px-[2.4%] md:py-[35px]"
+			aria-labelledby="hero-title"
+		>
+			<div class="md:-mt-3">
+				<p class="mb-[17px] font-mono text-[8px] uppercase tracking-[0.12em] text-white/70 md:text-[9px]">
+					Independent creative studio · Brooklyn, NY
+				</p>
+				<h1
+					class="mb-[26px] text-[clamp(40px,9.7vw,64px)] font-medium leading-[0.99] tracking-[-0.055em] md:text-[clamp(42px,5.1vw,76px)]"
+					id="hero-title"
+				>
+					A creative digital<br />agency that goes all<br />in or not at all.
+				</h1>
+				<a
+					class="inline-flex h-[43px] items-center gap-[26px] rounded-full border border-white/85 py-1 pr-[5px] pl-[13px] text-xs transition-colors duration-200 hover:bg-white hover:text-[#19090b] motion-reduce:transition-none"
+					href="mailto:hello@reemium.com"
+				>
+					<span>Work with us</span>
+					<span
+						class="grid size-8 place-items-center rounded-full bg-white text-base text-[#b40026]"
+						aria-hidden="true">↗</span
+					>
+				</a>
+			</div>
+
+			<aside
+				class="grid w-full grid-cols-[minmax(110px,0.85fr)_1.15fr] gap-[10px] md:my-3 md:block md:w-[min(220px,21vw)] md:shrink-0 md:ml-auto"
+				id="work"
+				aria-label="Our capabilities"
+			>
+				<a
+					class="reel relative block h-32 overflow-hidden rounded-[9px] border border-white/25 bg-[#531b2b] shadow-[0_12px_34px_rgba(0,0,0,0.24)] md:h-[152px]"
+					href="#work"
+					aria-label="Play studio reel"
+				>
+					<img
+						class="size-full object-cover object-[center_37%] transition-transform duration-500 hover:scale-[1.06] motion-reduce:transition-none"
+						src="/assets/img/hero-bg1.png"
+						alt="Portrait in warm evening light"
+						fetchpriority="high"
+					/>
+					<span class="absolute right-[11px] bottom-[10px] z-10 flex items-center gap-[7px] font-mono text-[9px]">
+						▶ <span class="font-sans text-[10px]">Play reel</span>
+					</span>
+				</a>
+				<div
+					class="row-span-1 mt-0 rounded-lg bg-[rgba(80,30,37,0.69)] px-[10px] backdrop-blur-xl md:mt-[10px] md:px-3"
+					id="services"
+				>
+					{disciplines.map((discipline, index) => (
+						<a
+							class="grid min-h-[41px] grid-cols-[34px_1fr_14px] items-center border-b border-white/15 font-mono text-[9px] uppercase transition-[padding] duration-200 last:border-b-0 hover:pl-[5px] motion-reduce:transition-none md:min-h-[37px] md:text-[10px]"
+							href="#contact"
+						>
+							<span class="text-white/60">/0{index + 1}</span>
+							<span>{discipline}</span>
+							<span class="justify-self-end" aria-hidden="true">↗</span>
+						</a>
+					))}
+				</div>
+				<p class="col-span-full mt-1 text-[11px] leading-[1.55] text-white/85 md:mt-[25px] md:text-xs">
+					Websites, AI products,<br />
+					brands, systems built for<br />
+					clarity &amp; impact.
+				</p>
+			</aside>
+		</section>
+
+		<footer
+			class="relative z-10 mx-[5%] grid grid-cols-2 items-center gap-y-[17px] border-t border-white/30 py-[17px] pb-[21px] font-mono text-sm font-medium leading-6 uppercase md:mx-[2.4%] md:grid-cols-3 md:gap-y-0"
+			id="about"
+		>
+			<a href="#work">Scroll to explore <span class="pl-[5px]" aria-hidden="true">→</span></a>
+			<span class="text-right md:text-center">Brooklyn, NY</span>
+			<div
+				class="col-span-full flex justify-start gap-[7px] md:col-span-1 md:justify-end"
+				id="contact"
+				aria-label="Social links"
+			>
+				<span class="mr-[5px]">Socials</span>
+				<a href="https://www.linkedin.com/" aria-label="LinkedIn">(in)</a>
+				<a href="https://www.instagram.com/" aria-label="Instagram">(ig)</a>
+				<a href="https://www.tiktok.com/" aria-label="TikTok">(tk)</a>
+				<a href="https://dribbble.com/" aria-label="Dribbble">(dr)</a>
+			</div>
+		</footer>
+	</main>
 </Layout>
+
+<style>
+	.hero__image {
+		z-index: 0;
+		background-image: url('/assets/img/hero-bg1.png');
+		background-position: center 38%;
+		background-size: cover;
+		filter: saturate(0.7) contrast(1.13) brightness(0.65);
+		transform: scale(1.025);
+	}
+
+	.hero__wash {
+		z-index: 0;
+		background:
+			linear-gradient(90deg, rgba(74, 0, 14, 0.79) 0%, rgba(39, 3, 9, 0.17) 47%, rgba(16, 8, 9, 0.83) 100%),
+			linear-gradient(0deg, rgba(16, 5, 7, 0.72), transparent 31%, rgba(19, 5, 8, 0.56)),
+			radial-gradient(ellipse at 23% 78%, rgba(192, 0, 32, 0.82), transparent 42%);
+		mix-blend-mode: color;
+	}
+
+	.hero__grain {
+		z-index: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+		opacity: 0.12;
+	}
+
+	.reel::after {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, rgba(15, 5, 8, 0.57), transparent 60%);
+		content: '';
+	}
+
+	@media (max-width: 767px) {
+		.hero__image {
+			background-position: 56% center;
+		}
+
+		.hero__wash {
+			background:
+				linear-gradient(90deg, rgba(55, 0, 12, 0.79), rgba(22, 4, 8, 0.38)),
+				linear-gradient(0deg, rgba(15, 5, 7, 0.85), transparent 50%, rgba(19, 5, 8, 0.52)),
+				radial-gradient(ellipse at 18% 73%, rgba(192, 0, 32, 0.72), transparent 48%);
+		}
+	}
+
+	@media (min-width: 1500px) {
+		main > section {
+			padding-right: 4.2%;
+			padding-left: 4.2%;
+		}
+	}
+</style>
