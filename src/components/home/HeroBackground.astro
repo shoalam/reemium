@@ -1,0 +1,42 @@
+<div class="hero__image pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<div class="hero__wash pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<div class="hero__grain pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+<style>
+	.hero__image {
+		z-index: 0;
+		background-image: url('/assets/img/hero-bg1.png');
+		background-position: center 38%;
+		background-size: cover;
+		filter: saturate(0.7) contrast(1.13) brightness(0.65);
+		transform: scale(1.025);
+	}
+
+	.hero__wash {
+		z-index: 0;
+		background:
+			linear-gradient(90deg, rgba(74, 0, 14, 0.79) 0%, rgba(39, 3, 9, 0.17) 47%, rgba(16, 8, 9, 0.83) 100%),
+			linear-gradient(0deg, rgba(16, 5, 7, 0.72), transparent 31%, rgba(19, 5, 8, 0.56)),
+			radial-gradient(ellipse at 23% 78%, rgba(192, 0, 32, 0.82), transparent 42%);
+		mix-blend-mode: color;
+	}
+
+	.hero__grain {
+		z-index: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+		opacity: 0.12;
+	}
+
+	@media (max-width: 767px) {
+		.hero__image {
+			background-position: 56% center;
+		}
+
+		.hero__wash {
+			background:
+				linear-gradient(90deg, rgba(55, 0, 12, 0.79), rgba(22, 4, 8, 0.38)),
+				linear-gradient(0deg, rgba(15, 5, 7, 0.85), transparent 50%, rgba(19, 5, 8, 0.52)),
+				radial-gradient(ellipse at 18% 73%, rgba(192, 0, 32, 0.72), transparent 48%);
+		}
+	}
+</style>

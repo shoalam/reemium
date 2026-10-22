@@ -1,0 +1,221 @@
+---
+const teamMembers = ['Studio team member 1', 'Studio team member 2', 'Studio team member 3', 'Studio team member 4'];
+const studioStats = [
+	{ value: '20%', description: ['Yearly revenue growth', 'on average'] },
+	{ value: '2016', description: ['Independent digital', 'studio'] },
+	{ value: '03', description: ['Design, branding,', 'development'] },
+];
+---
+
+<section
+	class="about-section pt-14 pb-14 text-[#373230] sm:pt-14 md:min-h-[504px] md:pb-14"
+	id="about"
+	aria-labelledby="about-title"
+>
+	<div class="about-container mx-auto w-full px-[2.5%]">
+		<div class="grid grid-cols-[1fr_auto] items-center font-mono text-[9px] uppercase tracking-[0.14em] text-[#e52e29]">
+			<p class="ml-[13%] flex items-center gap-[7px]">
+				<span class="text-[8px]" aria-hidden="true">▼</span>
+				About us
+			</p>
+			<p class="tracking-normal">Est. 2016 ©</p>
+		</div>
+
+		<h2
+			class="mt-[12px] max-w-[86%] text-[clamp(24px,3.4vw,32px)] font-medium leading-[1.22] tracking-[-0.045em] sm:indent-[13%]"
+			id="about-title"
+		>
+			Reemium is an independent digital studio crafting meaningful brand experiences through strategy, design, and technological innovations
+		</h2>
+
+		<div class="about-grid mt-10 grid gap-7">
+			<aside class="flex flex-col justify-between" aria-label="Studio statistics and team">
+				<div class="stat-slider" data-stat-slider>
+					<div class="flex items-center gap-1" aria-label="Statistic slide controls">
+						<div
+							class="stat-rule"
+							style={`--stat-progress: ${100 / studioStats.length}%`}
+							aria-hidden="true"
+						></div>
+						<button
+							class="stat-arrow"
+							type="button"
+							data-stat-prev
+							aria-label="Previous statistic"
+						>←</button>
+						<button
+							class="stat-arrow"
+							type="button"
+							data-stat-next
+							aria-label="Next statistic"
+						>→</button>
+					</div>
+					<div class="stat-slides mt-[7px]" aria-live="polite" aria-atomic="true">
+						{studioStats.map((stat, index) => (
+							<div data-stat-slide hidden={index !== 0}>
+								<p class="font-mono text-[24px] font-semibold leading-none tracking-[-0.06em] text-[#e52e29]">
+									{stat.value}
+								</p>
+								<p class="mt-[7px] max-w-[150px] text-[10px] leading-[1.45]">
+									{stat.description.map((line) => <span class="block">{line}</span>)}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+				<div class="mt-8 flex items-center pl-[1px]" aria-label="Meet our team">
+					{teamMembers.map((member, index) => (
+						<img
+							class={`team-avatar relative h-[27px] w-[27px] rounded-full border border-[#fbf4f0] object-cover grayscale ${index ? '-ml-[8px]' : ''}`}
+							style={`object-position: ${30 + index * 12}% center; z-index: ${teamMembers.length - index};`}
+							src="/assets/img/hero-bg1.png"
+							alt={member}
+							width="27"
+							height="27"
+						/>
+					))}
+				</div>
+			</aside>
+
+			<div class="about-copy flex flex-col">
+				<p class="text-[16.5px] leading-[1.3] tracking-[-0.025em]">
+					We build teams around ideas. Each project is led by designers, engineers, and specialists chosen specifically for the challenge at hand.
+				</p>
+				<p class="mt-[13px] text-[11px] leading-[1.5] text-[#716864]">
+					We've grown through experimentation, learning, and refinement, shaping a practice focused on clarity, craft, and long-term impact.
+				</p>
+				<p class="mt-[13px] text-[11px] leading-[1.5] text-[#716864]">
+					Today, we partner with startups and global brands to design digital products, platforms, and systems that scale with purpose and endure.
+				</p>
+				<a
+					class="mt-auto inline-flex h-[29px] w-fit items-center gap-[13px] rounded-full border border-[#655c58] py-[2px] pr-[3px] pl-[10px] text-[9px] font-medium"
+					href="#top"
+				>
+					More about us
+					<span class="grid size-[23px] place-items-center rounded-full bg-[#302c2a] text-[11px] text-[#fbf4f0]" aria-hidden="true">
+						↳
+					</span>
+				</a>
+			</div>
+
+			<img
+				class="about-image h-[242px] w-full rounded-[9px] object-cover object-[center_39%]"
+				src="/assets/img/hero-bg1.png"
+				alt="Portrait in warm studio lighting"
+				width="192"
+				height="242"
+				loading="lazy"
+			/>
+		</div>
+	</div>
+</section>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-stat-slider]').forEach((slider) => {
+		const slides = Array.from(slider.querySelectorAll<HTMLElement>('[data-stat-slide]'));
+		const progress = slider.querySelector<HTMLElement>('.stat-rule');
+		let activeIndex = 0;
+
+		const showSlide = (nextIndex: number) => {
+			activeIndex = (nextIndex + slides.length) % slides.length;
+			slides.forEach((slide, index) => {
+				slide.hidden = index !== activeIndex;
+			});
+			progress?.style.setProperty('--stat-progress', `${((activeIndex + 1) / slides.length) * 100}%`);
+		};
+
+		slider.querySelector('[data-stat-prev]')?.addEventListener('click', () => {
+			showSlide(activeIndex - 1);
+		});
+		slider.querySelector('[data-stat-next]')?.addEventListener('click', () => {
+			showSlide(activeIndex + 1);
+		});
+	});
+</script>
+
+<style>
+	.about-section {
+		background: #fbf4f0;
+	}
+
+	.stat-rule {
+		height: 1px;
+		flex: 1;
+		background: linear-gradient(90deg, #ec8277 0 var(--stat-progress), #e5dcd7 var(--stat-progress) 100%);
+		transition: background 200ms ease;
+	}
+
+	.stat-arrow {
+		display: grid;
+		width: 12px;
+		height: 14px;
+		place-items: center;
+		color: #716864;
+		font-size: 10px;
+		line-height: 1;
+	}
+
+	.stat-arrow:hover {
+		color: #e52e29;
+	}
+
+	[data-stat-slide][hidden] {
+		display: none;
+	}
+
+	.team-avatar {
+		filter: grayscale(1) brightness(1.4) contrast(0.9);
+	}
+
+	@media (min-width: 640px) {
+		.about-container {
+			max-width: 100%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.about-container {
+			max-width: 720px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.about-container {
+			max-width: 960px;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.about-container {
+			max-width: 1120px;
+		}
+	}
+
+	@media (min-width: 1536px) {
+		.about-container {
+			max-width: 1280px;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.about-grid {
+			grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.4fr) minmax(0, 1fr);
+			column-gap: 24px;
+		}
+
+		.about-copy {
+			min-height: 242px;
+		}
+	}
+
+	@media (max-width: 639px) {
+		.about-section h2 {
+			max-width: 100%;
+			text-indent: 0;
+		}
+
+		.about-image {
+			height: min(82vw, 340px);
+		}
+	}
+</style>

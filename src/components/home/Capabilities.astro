@@ -1,0 +1,54 @@
+---
+const disciplines = ['Design', 'Branding', 'Development'];
+---
+
+<aside
+	class="grid w-full grid-cols-[minmax(110px,0.85fr)_1.15fr] gap-[10px] md:my-3 md:ml-auto md:block md:w-[min(220px,21vw)] md:shrink-0"
+	id="work"
+	aria-label="Our capabilities"
+>
+	<a
+		class="reel relative block h-32 overflow-hidden rounded-[9px] border border-white/25 bg-[#531b2b] shadow-[0_12px_34px_rgba(0,0,0,0.24)] md:h-[152px]"
+		href="#work"
+		aria-label="Play studio reel"
+	>
+		<img
+			class="size-full object-cover object-[center_37%] transition-transform duration-500 hover:scale-[1.06] motion-reduce:transition-none"
+			src="/assets/img/hero-bg1.png"
+			alt="Portrait in warm evening light"
+			fetchpriority="high"
+		/>
+		<span class="absolute right-[11px] bottom-[10px] z-10 flex items-center gap-[7px] font-mono text-[9px]">
+			▶ <span class="font-sans text-[10px]">Play reel</span>
+		</span>
+	</a>
+	<div
+		class="row-span-1 mt-0 rounded-lg bg-[rgba(80,30,37,0.69)] px-[10px] backdrop-blur-xl md:mt-[10px] md:px-3"
+		id="services"
+	>
+		{disciplines.map((discipline, index) => (
+			<a
+				class="grid min-h-[41px] grid-cols-[34px_1fr_14px] items-center border-b border-white/15 font-mono text-[9px] uppercase transition-[padding] duration-200 last:border-b-0 hover:pl-[5px] motion-reduce:transition-none md:min-h-[37px] md:text-[10px]"
+				href="#contact"
+			>
+				<span class="text-white/60">/0{index + 1}</span>
+				<span>{discipline}</span>
+				<span class="justify-self-end" aria-hidden="true">↗</span>
+			</a>
+		))}
+	</div>
+	<p class="col-span-full mt-1 text-[11px] leading-[1.55] text-white/85 md:mt-[25px] md:text-xs">
+		Websites, AI products,<br />
+		brands, systems built for<br />
+		clarity &amp; impact.
+	</p>
+</aside>
+
+<style>
+	.reel::after {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, rgba(15, 5, 8, 0.57), transparent 60%);
+		content: '';
+	}
+</style>
